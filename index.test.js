@@ -98,16 +98,34 @@ describe('[Exercise 6] Car', () => {
     const actual = focus.drive(100);
     expect(actual).toBe(100);
   })
-  test.skip('[16] driving the car uses gas', () => {
-    expect(focus).toHaveProperty('tank');
+  test('[16] driving the car uses gas', () => {
+    expect(focus.fuel).toBe(600);
+    focus.drive(600);
+    expect(focus.fuel).toBe(0);
   })
-  test.skip('[17] refueling allows to keep driving', () => {
-    
+  test('[17] refueling allows to keep driving', () => {
+    expect(focus.odometer).toBe(0);
+    expect(focus.fuel).toBe(600);
+    focus.drive(600);
+    expect(focus.fuel).toBe(0);
+    expect(focus.odometer).toBe(600);
+    focus.refuel(1);
+    expect(focus.odometer).toBe(630);
   })
-  // test('[18] adding fuel to a full tank has no effect', () => {})
+  test('[18] adding fuel to a full tank has no effect', () => {
+    expect(focus.odometer).toBe(0);
+    focus.refuel(20);
+    expect(focus.odometer).toBe(0);
+  })
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
-  // test('[19] resolves true if passed an even number', () => {})
-  // test('[20] resolves false if passed an odd number', () => {})
+  test('[19] resolves true if passed an even number',async () => {
+    const actual = await utils.isEvenNumberAsync(2)
+    expect(actual).toBeTruthy();
+  })
+  test('[20] resolves false if passed an odd number',async () => {
+    const actual = await utils.isEvenNumberAsync(3);
+    expect(actual).toBeFalsy();
+  })
 })
